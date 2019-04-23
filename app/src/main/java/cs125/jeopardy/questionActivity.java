@@ -29,4 +29,7 @@ public class questionActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void hello() {
+        System.out.println("hi");
+    }
 }
