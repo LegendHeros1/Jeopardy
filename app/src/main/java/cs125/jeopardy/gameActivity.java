@@ -21,9 +21,11 @@ public class gameActivity extends AppCompatActivity {
         player1_name.setText(intent.getStringExtra("player1"));
         player2_name.setText(intent.getStringExtra("player2"));
 
-        int[] questionButtonsID = {R.id.v200_1, R.id.v200_2, R.id.v200_3, R.id.v200_4, R.id.v400_1, R.id.v400_2, R.id.v400_3,
-                R.id.v400_4, R.id.v600_1, R.id.v600_2, R.id.v600_3, R.id.v600_4, R.id.v800_1, R.id.v800_2, R.id.v800_3,
-                R.id.v800_4, R.id.v1000_1, R.id.v1000_2, R.id.v1000_3, R.id.v1000_4};
+        int[] questionButtonsID = {R.id.point_200_1, R.id.point_200_2, R.id.point_200_3, R.id.point_200_4,
+                R.id.point_400_1, R.id.point_400_2, R.id.point_400_3, R.id.point_400_4,
+                R.id.point_600_1, R.id.point_600_2, R.id.point_600_3, R.id.point_600_4,
+                R.id.point_800_1, R.id.point_800_2, R.id.point_800_3, R.id.point_800_4,
+                R.id.point_1000_1, R.id.point_1000_2, R.id.point_1000_3, R.id.point_1000_4};
         for (int ButtonID : questionButtonsID) {
             //set all the $valueButton to listen for a click and open the questionActivity.
             Button questionButton = findViewById(ButtonID);

@@ -19,25 +19,25 @@
                 android:id="@+id/category1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Science" />
+                android:text="@string/category_1_label" />
 
             <Button
                 android:id="@+id/category2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="History" />
+                android:text="@string/category_2_label" />
 
             <Button
                 android:id="@+id/category3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Geography" />
+                android:text="@string/category_3_label" />
 
             <Button
                 android:id="@+id/category4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sport" />
+                android:text="@string/category_4_label" />
 
         </TableRow>
 
@@ -47,28 +47,28 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/v200_1"
+                android:id="@+id/point_200_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$200" />
+                android:text="@string/point_value_1" />
 
             <Button
-                android:id="@+id/v200_2"
+                android:id="@+id/point_200_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$200" />
+                android:text="@string/point_value_1" />
 
             <Button
-                android:id="@+id/v200_3"
+                android:id="@+id/point_200_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$200" />
+                android:text="@string/point_value_1" />
 
             <Button
-                android:id="@+id/v200_4"
+                android:id="@+id/point_200_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$200" />
+                android:text="@string/point_value_1" />
         </TableRow>
 
         <TableRow
@@ -77,28 +77,28 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/v400_1"
+                android:id="@+id/point_400_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$400" />
+                android:text="@string/point_value_2" />
 
             <Button
-                android:id="@+id/v400_2"
+                android:id="@+id/point_400_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$400" />
+                android:text="@string/point_value_2" />
 
             <Button
-                android:id="@+id/v400_3"
+                android:id="@+id/point_400_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$400" />
+                android:text="@string/point_value_2" />
 
             <Button
-                android:id="@+id/v400_4"
+                android:id="@+id/point_400_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$400" />
+                android:text="@string/point_value_2" />
         </TableRow>
 
         <TableRow
@@ -107,28 +107,28 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/v600_1"
+                android:id="@+id/point_600_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$600" />
+                android:text="@string/point_value_3" />
 
             <Button
-                android:id="@+id/v600_2"
+                android:id="@+id/point_600_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$600" />
+                android:text="@string/point_value_3" />
 
             <Button
-                android:id="@+id/v600_3"
+                android:id="@+id/point_600_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$600" />
+                android:text="@string/point_value_3" />
 
             <Button
-                android:id="@+id/v600_4"
+                android:id="@+id/point_600_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$600" />
+                android:text="@string/point_value_3" />
         </TableRow>
 
         <TableRow
@@ -137,28 +137,28 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/v800_1"
+                android:id="@+id/point_800_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$800" />
+                android:text="@string/point_value_4" />
 
             <Button
-                android:id="@+id/v800_2"
+                android:id="@+id/point_800_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$800" />
+                android:text="@string/point_value_4" />
 
             <Button
-                android:id="@+id/v800_3"
+                android:id="@+id/point_800_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$800" />
+                android:text="@string/point_value_4" />
 
             <Button
-                android:id="@+id/v800_4"
+                android:id="@+id/point_800_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$800" />
+                android:text="@string/point_value_4" />
         </TableRow>
 
         <TableRow
@@ -167,28 +167,28 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/v1000_1"
+                android:id="@+id/point_1000_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$1000" />
+                android:text="@string/point_value_5" />
 
             <Button
-                android:id="@+id/v1000_2"
+                android:id="@+id/point_1000_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$1000" />
+                android:text="@string/point_value_5" />
 
             <Button
-                android:id="@+id/v1000_3"
+                android:id="@+id/point_1000_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$1000" />
+                android:text="@string/point_value_5" />
 
             <Button
-                android:id="@+id/v1000_4"
+                android:id="@+id/point_1000_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$1000" />
+                android:text="@string/point_value_5" />
         </TableRow>
 
         <TableRow
@@ -199,7 +199,7 @@
                 android:id="@+id/player1_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Player 1:"
+                android:text="@string/player1_name_label"
                 android:textSize="30sp" />
 
             <TextView
@@ -207,7 +207,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="$0"
+                android:text="@string/player_score_default"
                 android:textSize="30sp" />
         </TableRow>
 
@@ -219,7 +219,7 @@
                 android:id="@+id/player2_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Player 2:"
+                android:text="@string/player2_name_label"
                 android:textSize="30sp" />
 
             <TextView
@@ -227,7 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="$0"
+                android:text="@string/player_score_default"
                 android:textSize="30sp" />
         </TableRow>
 

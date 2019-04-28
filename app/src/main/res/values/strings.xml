@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Jeopardy</string>
+
+    <string name="player1_name_label">Player 1:</string>
+    <string name="player2_name_label">Player 2:</string>
+    <string name="player1_setName">Name1</string>
+    <string name="player2_setName">Name2</string>
+
+    <string name="player1_name_default">James</string>
+    <string name="player2_name_default">John</string>
+    <string name="start_btn_text">Start</string>
+
+    <string name="category_1_label">Science</string>
+    <string name="category_2_label">History</string>
+    <string name="category_3_label">Geography</string>
+    <string name="category_4_label">Sport</string>
+
+    <string name="point_value_1">$200</string>
+    <string name="point_value_2">$400</string>
+    <string name="point_value_3">$600</string>
+    <string name="point_value_4">$800</string>
+    <string name="point_value_5">$1000</string>
+    <string name="player_score_default">$0</string>
+
+    <string name="question_text_default">Question:</string>
+    <string name="answer_A_default">A</string>
+    <string name="answer_B_default">B</string>
+    <string name="answer_C_default">C</string>
+    <string name="answer_D_default">D</string>
 </resources>
