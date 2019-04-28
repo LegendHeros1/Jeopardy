@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
+
 public class gameActivity extends AppCompatActivity {
 
     @Override
@@ -40,9 +42,14 @@ public class gameActivity extends AppCompatActivity {
     }
 
     void openQuestionActivity() {
+        trivalApiCall();
         Intent intent = new Intent(this, questionActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void trivalApiCall() {
+
     }
 
 
