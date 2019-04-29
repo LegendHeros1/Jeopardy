@@ -20,17 +20,28 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
 public class gameActivity extends AppCompatActivity {
 
-    private Player playerOne;
-    private Player playerTwo;
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
 
-    private static String display = "";
+
+    private Player playerOne;
+    private Player playerTwo;
+    private Question questionClass;
+    private int questionValue;
+    private TextView testing;
+
+    /**
+     * odd number - player's one turn
+     * even number - player's two turn
+     */
+    private static int turn = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +67,7 @@ public class gameActivity extends AppCompatActivity {
         player1_score.setText(String.valueOf(playerOne.getScore()));
         player2_score.setText(String.valueOf(playerTwo.getScore()));
 
-        final TextView mTextViewResult = findViewById(R.id.testing_box);
+        testing = findViewById(R.id.testing);
         int[] questionButtonsID = {R.id.point_200_1, R.id.point_200_2, R.id.point_200_3, R.id.point_200_4,
                 R.id.point_400_1, R.id.point_400_2, R.id.point_400_3, R.id.point_400_4,
                 R.id.point_600_1, R.id.point_600_2, R.id.point_600_3, R.id.point_600_4,
@@ -68,9 +79,15 @@ public class gameActivity extends AppCompatActivity {
             questionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openQuestionActivity();
-                    //trivalAPICall("https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple");
-                    //mTextViewResult.setText(display);
+                    //using the name of the button to get the pointValue of the question - happen in trivalAPICall
+                    Button btn = (Button) v;
+                    String btn_text = btn.getText().toString();
+                    questionValue = Integer.valueOf(btn_text.substring(1));
+
+                    btn.setVisibility(View.INVISIBLE);
+                    trivalAPICall("https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple");
+                    testing.setText(String.valueOf(questionClass==null));
+                    //openQuestionActivity();
 
                 }
             });
@@ -146,9 +163,14 @@ public class gameActivity extends AppCompatActivity {
     }
 
     void openQuestionActivity() {
+        //increase the turn count;
+        turn++;
         Intent intent = new Intent(this, questionActivity.class);
         intent.putExtra("playerOneClass", playerOne);
         intent.putExtra("playerTwoClass", playerTwo);
+        intent.putExtra("questionClass", questionClass);
+        intent.putExtra("questionBoolean", String.valueOf(questionClass==null));
+        intent.putExtra("turnCount", turn);
         startActivity(intent);
         finish();
     }
@@ -184,9 +206,20 @@ public class gameActivity extends AppCompatActivity {
 
             String question = firstQuestionSet.getString("question");
             String correct_Answer = firstQuestionSet.getString("correct_answer");
-            JSONArray incorrect_Answers = firstQuestionSet.getJSONArray("incorrect_answers");
 
-            display = incorrect_Answers.getString(2);
+            JSONArray incorrects = firstQuestionSet.getJSONArray("incorrect_answers");
+            //add the incorrect_answers to the arrayList
+            //add the correct answer to the arrayList at a random chosen index(0,1,2,3)
+            ArrayList<String> answer_Choices = new ArrayList<>();
+            for (int i = 0; i < incorrects.length(); i++) {
+                answer_Choices.add(incorrects.getString(i));
+            }
+            Random random = new Random();
+            int randomIndex = random.nextInt(answer_Choices.size());
+            answer_Choices.add(randomIndex, correct_Answer);
+
+            questionClass = new Question(question, correct_Answer, answer_Choices);
+            questionClass.setQuestionValue(questionValue);
         } catch (JSONException ignored) {
             //do nothing
         }
