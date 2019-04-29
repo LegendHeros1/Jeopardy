@@ -46,7 +46,7 @@ public class gameActivity extends AppCompatActivity {
      * odd number - player's one turn
      * even number - player's two turn
      */
-    private static int turn = 0;
+    private static int turn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +67,16 @@ public class gameActivity extends AppCompatActivity {
         TextView player1_score = findViewById(R.id.player1_score);
         TextView player2_score = findViewById(R.id.player2_score);
 
+
         playerOne = (Player)intent.getSerializableExtra("playerOneClass");
         playerTwo = (Player)intent.getSerializableExtra("playerTwoClass");
+        turn = intent.getIntExtra("turnCount", 1);
 
         player1_name.setText(playerOne.getName());
         player2_name.setText(playerTwo.getName());
         player1_score.setText(String.valueOf(playerOne.getScore()));
         player2_score.setText(String.valueOf(playerTwo.getScore()));
+
 
         int[] questionButtonsID = {R.id.point_200_1, R.id.point_200_2, R.id.point_200_3, R.id.point_200_4,
                 R.id.point_400_1, R.id.point_400_2, R.id.point_400_3, R.id.point_400_4,
@@ -85,7 +88,7 @@ public class gameActivity extends AppCompatActivity {
             Button questionButton = findViewById(ButtonID);
             String buttonStringID = getButtonIdString(questionButton.getId());
 
-            if (turn == 0) {
+            if (turn == 1) {
                 prefs.edit().putBoolean(buttonStringID, true).apply();
 
             }
@@ -106,7 +109,6 @@ public class gameActivity extends AppCompatActivity {
             });
 
         }
-        turn++;
         highlightPlayerTurn(turn);
 
     }

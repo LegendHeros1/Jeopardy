@@ -72,6 +72,7 @@ public class questionActivity extends AppCompatActivity {
         Intent intent = new Intent(this, gameActivity.class);
         intent.putExtra("playerOneClass", playerOne);
         intent.putExtra("playerTwoClass", playerTwo);
+        intent.putExtra("turnCount", turn + 1);
         startActivity(intent);
         finish();
     }
