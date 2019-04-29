@@ -8,7 +8,10 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="38dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -234,16 +237,16 @@
     </TableLayout>
 
     <TextView
-        android:id="@+id/testing_box"
-        android:layout_width="330dp"
-        android:layout_height="102dp"
+        android:id="@+id/testing"
+        android:layout_width="145dp"
+        android:layout_height="112dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="16dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

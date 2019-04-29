@@ -13,7 +13,7 @@
     <string name="category_1_label">Science</string>
     <string name="category_2_label">History</string>
     <string name="category_3_label">Geography</string>
-    <string name="category_4_label">Sport</string>
+    <string name="category_4_label">General</string>
 
     <string name="point_value_1">$200</string>
     <string name="point_value_2">$400</string>
