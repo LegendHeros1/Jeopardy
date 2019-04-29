@@ -1,6 +1,9 @@
 package cs125.jeopardy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +38,9 @@ public class gameActivity extends AppCompatActivity {
     private Player playerTwo;
     private Question questionClass;
     private int questionValue;
-    private TextView testing;
+
+    private TextView player1_name;
+    private TextView player2_name;
 
     /**
      * odd number - player's one turn
@@ -52,10 +57,13 @@ public class gameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game);
 
+        //save states
+        final SharedPreferences prefs = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
+
         //get information from intent and set information for player 1 and player 2
         Intent intent = getIntent();
-        TextView player1_name = findViewById(R.id.player1_text);
-        TextView player2_name = findViewById(R.id.player2_text);
+        player1_name = findViewById(R.id.player1_text);
+        player2_name = findViewById(R.id.player2_text);
         TextView player1_score = findViewById(R.id.player1_score);
         TextView player2_score = findViewById(R.id.player2_score);
 
@@ -67,7 +75,6 @@ public class gameActivity extends AppCompatActivity {
         player1_score.setText(String.valueOf(playerOne.getScore()));
         player2_score.setText(String.valueOf(playerTwo.getScore()));
 
-        testing = findViewById(R.id.testing);
         int[] questionButtonsID = {R.id.point_200_1, R.id.point_200_2, R.id.point_200_3, R.id.point_200_4,
                 R.id.point_400_1, R.id.point_400_2, R.id.point_400_3, R.id.point_400_4,
                 R.id.point_600_1, R.id.point_600_2, R.id.point_600_3, R.id.point_600_4,
@@ -76,23 +83,64 @@ public class gameActivity extends AppCompatActivity {
         for (int ButtonID : questionButtonsID) {
             //set all the $valueButton to listen for a click and open the questionActivity.
             Button questionButton = findViewById(ButtonID);
+            String buttonStringID = getButtonIdString(questionButton.getId());
+
+            if (turn == 0) {
+                prefs.edit().putBoolean(buttonStringID, true).apply();
+
+            }
+            questionButton.setVisibility(prefs.getBoolean(buttonStringID, true) ? View.VISIBLE : View.INVISIBLE);
             questionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //using the name of the button to get the pointValue of the question - happen in trivalAPICall
                     Button btn = (Button) v;
                     String btn_text = btn.getText().toString();
+                    String buttonStringID = getButtonIdString(btn.getId());
+
                     questionValue = Integer.valueOf(btn_text.substring(1));
-
                     btn.setVisibility(View.INVISIBLE);
-                    trivalAPICall("https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple");
-                    testing.setText(String.valueOf(questionClass==null));
-                    //openQuestionActivity();
-
+                    prefs.edit().putBoolean(buttonStringID, false).apply();
+                    trivalAPICall(api_information(buttonStringID));
                 }
             });
 
         }
+        turn++;
+        highlightPlayerTurn(turn);
+
+    }
+
+    public String getButtonIdString(int buttonID) {
+        return ((Button) findViewById(buttonID)).getResources().getResourceEntryName(buttonID);
+    }
+    public void highlightPlayerTurn(int turn) {
+        if (turn % 2 == 1) {
+            //player 1 turn
+            player1_name.setTextColor(Color.GREEN);
+            player2_name.setTextColor(Color.BLACK);
+        } else {
+            player2_name.setTextColor(Color.GREEN);
+            player1_name.setTextColor(Color.BLACK);
+        }
+    }
+
+    public String api_information(String buttonStringID) {
+        String[] splitArr = buttonStringID.split("_");
+        String categoryID = "category" + splitArr[2];;
+        int questionValue = Integer.valueOf(splitArr[1]);
+
+        if (questionValue <= 400) {
+            return getAPIurl(categoryID, "easy");
+        }
+        else if (questionValue <= 800) {
+            return getAPIurl(categoryID, "medium");
+        } else {
+            return getAPIurl(categoryID, "hard");
+        }
+
+
+
     }
 
     /**
@@ -113,7 +161,7 @@ public class gameActivity extends AppCompatActivity {
      * Politics: 24
      *
      *
-     * @param difficult difficulty level - easy, medium, hard
+     * @param difficult difficulty level - easy(200,400), medium(2600,800), hard(1000)
      * @return something like this https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple
      */
 
@@ -164,12 +212,10 @@ public class gameActivity extends AppCompatActivity {
 
     void openQuestionActivity() {
         //increase the turn count;
-        turn++;
         Intent intent = new Intent(this, questionActivity.class);
         intent.putExtra("playerOneClass", playerOne);
         intent.putExtra("playerTwoClass", playerTwo);
         intent.putExtra("questionClass", questionClass);
-        intent.putExtra("questionBoolean", String.valueOf(questionClass==null));
         intent.putExtra("turnCount", turn);
         startActivity(intent);
         finish();
@@ -220,6 +266,7 @@ public class gameActivity extends AppCompatActivity {
 
             questionClass = new Question(question, correct_Answer, answer_Choices);
             questionClass.setQuestionValue(questionValue);
+            openQuestionActivity();
         } catch (JSONException ignored) {
             //do nothing
         }
