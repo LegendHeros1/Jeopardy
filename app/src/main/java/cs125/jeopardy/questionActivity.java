@@ -8,10 +8,17 @@ import android.widget.Button;
 
 public class questionActivity extends AppCompatActivity {
 
+    private Player playerOne;
+    private Player playerTwo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+
+        Intent intent = getIntent();
+        playerOne = (Player)intent.getSerializableExtra("playerOneClass");
+        playerTwo = (Player)intent.getSerializableExtra("playerTwoClass");
 
         int[] questionChoiceID = {R.id.answer_A, R.id.answer_B, R.id.answer_C, R.id.answer_D};
         for (int ChoiceID : questionChoiceID) {
@@ -26,6 +33,9 @@ public class questionActivity extends AppCompatActivity {
     }
     void backToGameActivity() {
         Intent intent = new Intent(this, gameActivity.class);
+        playerOne.increaseScore(20);
+        intent.putExtra("playerOneClass", playerOne);
+        intent.putExtra("playerTwoClass", playerTwo);
         startActivity(intent);
         finish();
     }

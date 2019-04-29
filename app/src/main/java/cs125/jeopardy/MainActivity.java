@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
     void startGame() {
         Intent intent = new Intent(this, gameActivity.class);
-        intent.putExtra("player1", getTextIn(R.id.edit_player1_name));
-        intent.putExtra("player2", getTextIn(R.id.edit_player2_name));
-
+        Player playerOne = new Player(getTextIn(R.id.edit_player1_name), 0);
+        Player playerTwo = new Player(getTextIn(R.id.edit_player2_name), 0);
+        intent.putExtra("playerOneClass", playerOne);
+        intent.putExtra("playerTwoClass", playerTwo);
         startActivity(intent);
         finish();
     }

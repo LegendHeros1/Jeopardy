@@ -3,7 +3,6 @@ package cs125.jeopardy;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,18 +12,21 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.Random;
 
 
 public class gameActivity extends AppCompatActivity {
 
+    private Player playerOne;
+    private Player playerTwo;
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
 
@@ -39,12 +41,20 @@ public class gameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game);
 
-        //get information from intent and set name for player 1 and player 2
+        //get information from intent and set information for player 1 and player 2
         Intent intent = getIntent();
         TextView player1_name = findViewById(R.id.player1_text);
         TextView player2_name = findViewById(R.id.player2_text);
-        player1_name.setText(intent.getStringExtra("player1"));
-        player2_name.setText(intent.getStringExtra("player2"));
+        TextView player1_score = findViewById(R.id.player1_score);
+        TextView player2_score = findViewById(R.id.player2_score);
+
+        playerOne = (Player)intent.getSerializableExtra("playerOneClass");
+        playerTwo = (Player)intent.getSerializableExtra("playerTwoClass");
+
+        player1_name.setText(playerOne.getName());
+        player2_name.setText(playerTwo.getName());
+        player1_score.setText(String.valueOf(playerOne.getScore()));
+        player2_score.setText(String.valueOf(playerTwo.getScore()));
 
         final TextView mTextViewResult = findViewById(R.id.testing_box);
         int[] questionButtonsID = {R.id.point_200_1, R.id.point_200_2, R.id.point_200_3, R.id.point_200_4,
@@ -58,9 +68,10 @@ public class gameActivity extends AppCompatActivity {
             questionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    trivalAPICall("https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple");
-                    mTextViewResult.setText(display);
-                    //openQuestionActivity();
+                    openQuestionActivity();
+                    //trivalAPICall("https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple");
+                    //mTextViewResult.setText(display);
+
                 }
             });
 
@@ -135,8 +146,9 @@ public class gameActivity extends AppCompatActivity {
     }
 
     void openQuestionActivity() {
-        //trivalApiCall();
         Intent intent = new Intent(this, questionActivity.class);
+        intent.putExtra("playerOneClass", playerOne);
+        intent.putExtra("playerTwoClass", playerTwo);
         startActivity(intent);
         finish();
     }
@@ -171,7 +183,10 @@ public class gameActivity extends AppCompatActivity {
             JSONObject firstQuestionSet = results.getJSONObject(0);
 
             String question = firstQuestionSet.getString("question");
-            display = question;
+            String correct_Answer = firstQuestionSet.getString("correct_answer");
+            JSONArray incorrect_Answers = firstQuestionSet.getJSONArray("incorrect_answers");
+
+            display = incorrect_Answers.getString(2);
         } catch (JSONException ignored) {
             //do nothing
         }
